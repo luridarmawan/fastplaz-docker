@@ -27,4 +27,4 @@ cd files/
 #docker build . -f Dockerfile-$OS$RELEASE -t fastplaz/$OS$RELEASE
 
 # Build multi-arch Docker image
-docker buildx build -f Dockerfile-$OS$RELEASE --platform linux/amd64,linux/arm64 -t fastplaz/$OS$RELEASE:multiarch --push .
+docker buildx build -f Dockerfile-$OS$RELEASE --platform linux/amd64,linux/arm64 -t fastplaz/$OS$RELEASE:multiarch .
