@@ -54,7 +54,7 @@ $./container-run.sh [ubuntu|centos] [runtime]
 if you want to running di detacth mode
 
 ```
-docker run -d -it -p 8080:80 fastplaz/ubuntu
+docker run -d -it -p 8080:80 fastplaz/ubuntu:multiarch
 ```
 
 

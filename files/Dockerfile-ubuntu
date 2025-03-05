@@ -4,9 +4,7 @@
 # enter bash:
 #   docker run -it fastplaz bash
 
-FROM luri/free-pascal AS base
-
-MAINTAINER Luri Darmawan <luri@***.com>
+FROM luri/free-pascal:multiarch AS base
 
 #VOLUME ["/projects/vendors", "/public_html", "/app"]
 RUN mkdir -p /projects/vendors/
