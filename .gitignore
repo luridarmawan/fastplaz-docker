@@ -68,3 +68,6 @@ __recovery/
 # Mac
 .DS_Store
 
+
+# FastPlaz project compiler config (required for building)
+!extra.cfg

@@ -25,7 +25,7 @@ Make sure Docker is running and have good internet access,
 then run this script
 
 ```
-$./build.sh [ubuntu|centos] [runtime]
+$./build.sh [ubuntu] [runtime] [--push]
 ```
 example:
 
@@ -33,7 +33,8 @@ example:
 $./build.sh
 ```
 
-This script will produce image: **fastplaz/ubuntu**.
+This script will produce image: **fastplaz/ubuntu** (local platform).
+Use `--push` to build multi-arch (amd64, arm64) and push **fastplaz/ubuntu:latest** and **:multiarch** to the registry.
 
 You can see the image result from this command
 
@@ -54,7 +55,7 @@ $./container-run.sh [ubuntu|centos] [runtime]
 if you want to running di detacth mode
 
 ```
-docker run -d -it -p 8080:80 fastplaz/ubuntu:multiarch
+docker run -d -it -p 8080:80 fastplaz/ubuntu
 ```
 
 

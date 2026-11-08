@@ -1,38 +1,35 @@
-# Use an official ubuntu as a parent image
-# build:
-#   docker build . -t fastplaz
+# FastPlaz on Ubuntu (base image: luri/free-pascal)
+# build (local):
+#   ./build.sh            -> fastplaz/ubuntu:latest
+# build & push multi-arch:
+#   ./build.sh ubuntu --push
 # enter bash:
-#   docker run -it fastplaz bash
+#   docker run -it fastplaz/ubuntu bash
 
 FROM luri/free-pascal:multiarch AS base
 
-#VOLUME ["/projects/vendors", "/public_html", "/app"]
-RUN mkdir -p /projects/vendors/
 WORKDIR /projects
-ADD ./app/ /app
+COPY ./app/ /app
+# /app/run.sh is provided by the base image
+RUN chmod +x /app/*.sh
 
 # Environment
-ENV NAME FastPlaz
-ENV DEBIAN_FRONTEND noninteractive
-
-#RUN apt-get update
-
-# ---- Dependencies ----
-#FROM base AS dependencies
+ENV NAME=FastPlaz
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Prepare FastPlaz
 RUN /app/fastplaz-init.sh
 
 # Prepare Echo Project (example)
-ADD ./project-examples/echo /projects/echo/
-RUN ln -fs /projects/echo/public_html /var/www/html/echo
-RUN chmod -R 777 /projects/echo/public_html/ztemp
+COPY ./project-examples/echo /projects/echo/
+RUN ln -fs /projects/echo/public_html /var/www/html/echo && \
+  chmod -R 777 /projects/echo/public_html/ztemp
 
 # Build Echo Project (example)
 RUN cd /projects/echo/source/echo/ && \
-  ./build.sh
+  chmod +x ./*.sh && \
+  ./build.sh && \
+  test -f /projects/echo/public_html/echo.bin
 
 # run apache
-# CMD ["/app/run.sh"]
-
-
+CMD ["/app/run.sh"]
