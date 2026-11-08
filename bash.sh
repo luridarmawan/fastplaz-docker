@@ -10,7 +10,7 @@ echo   $ ./clean.sh
 echo   $ ./compile.sh
 echo
 echo Output File:
-echo   /projects/echo/public_htm/echo.bin
+echo   /projects/echo/public_html/echo.bin
 echo
 
 OS=$1
